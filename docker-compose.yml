@@ -1,0 +1,38 @@
+version: '3'
+services:
+  drivent-production:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: drivent-back
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
+    working_dir: /usr/src/drivent
+    command: bash -c "npx prisma generate && npm run migration:run && npm run start"
+    restart: always
+    environment:
+      NODE_ENV: production
+      DATABASE_URL: ${DATABASE_URL}
+      JWT_SECRET: ${JWT_SECRET}
+  drivent-postgres-production:
+    image: postgres:13-alpine
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - /usr/local/drivent-pg/data:/var/lib/postgresql/data
+    command: postgres -p ${POSTGRES_PORT}
+  drivent-nginx:
+    image: nginx
+    ports:
+      - 80:80
+      - 443:443
+    volumes:
+      - ./nginx:/etc/nginx/conf.d
+      - /usr/src/drivent/front-end:/var/www/html

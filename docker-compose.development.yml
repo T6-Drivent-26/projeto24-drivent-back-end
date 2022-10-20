@@ -1,0 +1,42 @@
+version: '3'
+services:
+  drivent-postgres-development:
+    image: postgres:13-alpine
+    container_name: drivent-postgres-development
+    environment:
+      POSTGRES_USER: ${POSTGRES_USERNAME}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD}
+      POSTGRES_DB: ${POSTGRES_DATABASE}
+    ports:
+      - ${POSTGRES_PORT}:${POSTGRES_PORT}
+    volumes:
+      - drivent-postgres-data:/var/lib/postgresql/data
+    command: postgres -p ${POSTGRES_PORT}
+  drivent-development:
+    build:
+      context: .
+      dockerfile: Dockerfile.development
+    container_name: drivent-development
+    depends_on:
+      - drivent-postgres-development
+    logging:
+      driver: 'json-file'
+      options:
+        max-size: '10m'
+        max-file: '5'
+    working_dir: /usr/src/drivent
+    command: bash -c "npx prisma generate && npm run dev"
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./src:/usr/src/drivent/src
+      - ./prisma:/usr/src/drivent/prisma
+      - ./.env.development:/usr/src/drivent/.env.development
+      - ./.eslintrc.js:/usr/src/drivent/.eslintrc.js
+      - ./.eslintignore:/usr/src/drivent/.eslintignore
+      - ./.prettierrc.js:/usr/src/drivent/.prettierrc.js
+      - ./tsconfig.json:/usr/src/drivent/tsconfig.json
+    ports:
+      - 4000:4000
+volumes:
+  drivent-postgres-data:
