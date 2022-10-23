@@ -82,4 +82,5 @@ model Ticket {
   User        User      @relation(fields: [userId], references: [id])
   categoryId  Int
   Category    Category  @relation(fields: [categoryId], references: [id])
+  cost        Int
 }
