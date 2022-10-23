@@ -16,6 +16,20 @@ async function main() {
     });
   }
 
+  const categories = [
+    { category: 'Presencial',
+      price: 250
+    },
+    { category: 'Online',
+      price: 100
+    },
+  ];
+
+  await prisma.category.createMany({
+    data: categories,
+    skipDuplicates: true
+  });
+
   console.log({ event });
 }
 
