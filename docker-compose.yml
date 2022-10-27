@@ -28,7 +28,7 @@ services:
     volumes:
       - /usr/local/drivent-pg/data:/var/lib/postgresql/data
     command: postgres -p ${POSTGRES_PORT}
-  drivent-nginx:
+  drivent-nginx: 
     image: nginx
     ports:
       - 80:80
