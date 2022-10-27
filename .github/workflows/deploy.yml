@@ -7,7 +7,7 @@ name: Build and Deploy
 jobs:
   build:
     runs-on: drivent
-    timeout-minutes: 20
+    timeout-minutes: 20 
     steps:
       - name: Checkout
         uses: actions/checkout@v2
