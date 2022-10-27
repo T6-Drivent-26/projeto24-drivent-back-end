@@ -17,7 +17,7 @@ services:
       NODE_ENV: production
       DATABASE_URL: ${DATABASE_URL}
       JWT_SECRET: ${JWT_SECRET}
-  drivent-postgres-production:
+  drivent-postgres-production: 
     image: postgres:13-alpine
     environment:
       POSTGRES_USER: ${POSTGRES_USERNAME}
