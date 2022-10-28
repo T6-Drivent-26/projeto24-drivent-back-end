@@ -18,7 +18,7 @@ jobs:
           docker run -v $GITHUB_WORKSPACE:/usr/app node:16.15-alpine sh -c "cd /usr/app && node .github/workflows/scripts/generate-env-file.js"
         env:
           SECRETS: ${{ toJson(secrets) }}
-
+ 
       - name: Build
         run: docker-compose build
 
