@@ -6,7 +6,7 @@ on:
 name: Build and Deploy
 jobs:
   build:
-    runs-on: runs-on: self-hosted
+    runs-on: self-hosted
     timeout-minutes: 20
     steps:
       - name: Checkout
