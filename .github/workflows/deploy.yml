@@ -14,7 +14,7 @@ jobs:
 
       - name: Environment variables setup
         run: |
-          cd $GITHUB_WORKSPACE
+          cd home/actions-runner/_work/projeto24-drivent-back-end/projeto24-drivent-back-end/
           echo "$SECRETS" > ./.github/workflows/scripts/env.json
           docker run -v home/actions-runner/_work/projeto24-drivent-back-end/projeto24-drivent-back-end/usr/app  node:16.15-alpine sh -c "cd /usr/app && node .github/workflows/scripts/generate-env-file.js"
         env:
