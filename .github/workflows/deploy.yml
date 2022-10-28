@@ -6,7 +6,7 @@ on:
 name: Build and Deploy
 jobs:
   build:
-    runs-on: self-hosted
+    runs-on: runs-on: self-hosted
     timeout-minutes: 20
     steps:
       - name: Checkout
@@ -14,10 +14,9 @@ jobs:
 
       - name: Environment variables setup
         run: |
-          cd home/actions-runner/_work/projeto24-drivent-back-end/projeto24-drivent-back-end/
+          cd $GITHUB_WORKSPACE
           echo "$SECRETS" > ./.github/workflows/scripts/env.json
-          mkdir /usr/app
-          docker run -v home/actions-runner/_work/projeto24-drivent-back-end/projeto24-drivent-back-end/  node:16.15-alpine sh -c "cd /usr/app && node .github/workflows/scripts/generate-env-file.js"
+          docker run -v $GITHUB_WORKSPACE:/usr/app node:16.15-alpine sh -c "cd /usr/app && node .github/workflows/scripts/generate-env-file.js"
         env:
           SECRETS: ${{ toJson(secrets) }}
 
