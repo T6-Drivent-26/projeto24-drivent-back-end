@@ -1,3 +1,4 @@
+/* eslint-disable import/no-unresolved */
 import { notFoundError } from '@/errors';
 import ticketRepository from '@/repositories/ticket-repository';
 
@@ -9,7 +10,7 @@ async function getAllCategories() {
 }
 
 const ticketsService = {
-    getAllCategories
-  };
-  
+  getAllCategories,
+};
+
 export default ticketsService;
