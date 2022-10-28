@@ -12,7 +12,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v3
       - name: Environment variables setup
-        uses: actions/checkout@v3
+        uses: actions/checkout@v3 
         run: |
           cd $GITHUB_WORKSPACE
           echo "$SECRETS" > ./.github/workflows/scripts/env.json
