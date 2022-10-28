@@ -11,7 +11,7 @@ services:
         max-size: '10m'
         max-file: '5'
     working_dir: /usr/src/drivent
-    command: bash -c "npx prisma generate && npm run migration:run && npm run start"
+    command: bash -c "npx prisma generate && npm run migration:run && npm run start && npx prisma db seed"
     restart: always
     environment:
       NODE_ENV: production
