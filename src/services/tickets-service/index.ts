@@ -9,8 +9,16 @@ async function getAllCategories() {
   return tickets;
 }
 
+async function getAllAccomodations() {
+  const accommodations = await ticketRepository.findAllAccommodations();
+  if (!accommodations) throw notFoundError();
+
+  return accommodations;
+}
+
 const ticketsService = {
   getAllCategories,
+  getAllAccomodations,
 };
 
 export default ticketsService;
