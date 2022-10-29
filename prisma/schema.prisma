@@ -71,14 +71,14 @@ model Address {
 
 model Category {
   id            Int        @id @default(autoincrement())
-  category      String     @db.VarChar(255)
+  category      String     @unique @db.VarChar(255)
   price         Int
   Ticket        Ticket[]
 }
 
 model Accommodation {
   id            Int        @id @default(autoincrement())
-  accommodation String     @db.VarChar(255)
+  accommodation String     @unique @db.VarChar(255)
   price         Int
   Ticket        Ticket[]
 }
