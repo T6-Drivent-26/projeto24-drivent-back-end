@@ -91,4 +91,5 @@ model Ticket {
   Category        Category  @relation(fields: [categoryId], references: [id])
   accommodationId Int
   Accommodation   Accommodation @relation(fields: [accommodationId], references: [id])
+  cost            Int
 }
