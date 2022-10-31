@@ -30,6 +30,20 @@ async function main() {
     skipDuplicates: true
   });
 
+  const accommodations = [
+    { accommodation: 'Sem Hotel',
+      price: 0
+    },
+    { accommodation: 'Com Hotel',
+      price: 350
+    },
+  ];
+
+  await prisma.accommodation.createMany({
+    data: accommodations,
+    skipDuplicates: true
+  });
+
   console.log({ event });
 }
 

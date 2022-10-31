@@ -71,16 +71,25 @@ model Address {
 
 model Category {
   id            Int        @id @default(autoincrement())
-  category      String     @db.VarChar(255)
+  category      String     @unique @db.VarChar(255)
+  price         Int
+  Ticket        Ticket[]
+}
+
+model Accommodation {
+  id            Int        @id @default(autoincrement())
+  accommodation String     @unique @db.VarChar(255)
   price         Int
   Ticket        Ticket[]
 }
 
 model Ticket {
-  id          Int       @id @default(autoincrement())
-  userId      Int       @unique
-  User        User      @relation(fields: [userId], references: [id])
-  categoryId  Int
-  Category    Category  @relation(fields: [categoryId], references: [id])
-  cost        Int
+  id              Int       @id @default(autoincrement())
+  userId          Int       @unique
+  User            User      @relation(fields: [userId], references: [id])
+  categoryId      Int
+  Category        Category  @relation(fields: [categoryId], references: [id])
+  accommodationId Int
+  Accommodation   Accommodation @relation(fields: [accommodationId], references: [id])
+  cost            Int
 }

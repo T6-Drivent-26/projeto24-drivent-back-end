@@ -7,3 +7,9 @@ export async function getCategories(req: Request, res: Response) {
 
   return res.status(httpStatus.OK).send(categories);
 }
+
+export async function getAccommodations(req: Request, res: Response) {
+  const accommodations = await ticketsService.getAllAccomodations();
+
+  return res.status(httpStatus.OK).send(accommodations);
+}
